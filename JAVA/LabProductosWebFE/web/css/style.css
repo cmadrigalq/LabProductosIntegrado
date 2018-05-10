@@ -1,0 +1,82 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01/03/2018, 07:04:22 PM
+    Author     : Manuel Céspedes
+*/
+/*#tableBusqueda{
+    margin-left: 65%;
+    width: 50%;
+    padding: 5%;
+}*/
+#columBusquedaLbl{
+    width: 100px;
+    text-align: right;
+    padding: 5%;
+}
+
+#columBusqueda{
+    width: 200px;
+}
+
+#columFormLbl{
+    width: 100px;
+    text-align: center;
+}
+
+#columForm{
+    width: 200px;
+    text-align: center;
+    padding: 1%;
+}
+
+
+.datagrid table {     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                      font-size: 12px;    margin: auto;     width: 40%; text-align: center;    border-collapse: collapse;
+
+}
+
+.datagrid th {     font-size: 13px;     font-weight: normal;     padding: 8px;     background: lemonchiffon;
+                   border-top: 4px solid white;    border-bottom: 1px solid #fff; color: #039; }
+
+.datagrid td {    padding: 8px;     background: #e8edff;     border-bottom: 1px solid #fff;
+                  color: #669;    border-top: 1px solid transparent; }
+
+.datagrid tr:hover td { background: #d0dafd; color: #339; cursor:pointer;}
+.datagrid table th {background-color: forestgreen; color:#fff; text-align:center;}
+
+.datagrid table tr:nth-child(odd) {background-color: lightgrey;}
+
+.datagridtable tr:nth-child(even) {background-color: lightcyan;}
+.datagrid {text-align:center;margin: 0 auto; }
+.datagrid th{text-align:center;}
+.celdaNo{
+    background-color: rgba(251,255,97,.5);
+}
+.celdaEn{
+    background-color: rgba(169,208,245,.5); 
+}
+.celdaEntregada{
+    background-color: rgba(88,250,130,.5); 
+}
+.celdaAnulada{
+    background-color: rgba(247,129,129,.5); 
+}
+
+.scroll_table{
+    border: none;
+    border-collapse: collapse;
+}
+.scroll_table thead{
+
+}
+
+.scroll_table tbody{
+    width: 100%;
+    position:relative;
+    max-height:500px;
+    overflow-y: scroll;
+}
