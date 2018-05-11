@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import labProductosBE.JSON.Json;
 import labProductosBE.LogicaNegocio.Producto;
 
 
@@ -52,6 +53,10 @@ public class ProductosService extends HttpServlet {
                     p = (Producto)jsn.toObject(arg, Producto.class);
                     ctl.addProducto(p);
                     out.write(jsn.toJson(true));
+                    break;
+                case "listarTipos":
+                    ctl.listarTiposProductos();
+                    out.write(jsn.fromArray(Modelo.tipos));
                     break;
                 default:
                     out.write("eco");

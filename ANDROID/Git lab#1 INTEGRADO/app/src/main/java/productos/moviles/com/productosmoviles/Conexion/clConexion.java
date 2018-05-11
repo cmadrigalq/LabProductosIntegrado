@@ -12,7 +12,7 @@ import java.net.URLConnection;
 
 
 public class clConexion {
-    final String urlFormat = "http://%s/webProductosFE/";
+    final String urlFormat = "http://%s/webProductosFE/ProductosService";
     final String defaultIP = "192.168.0.12:8081";
     public clConexion() {
     }
