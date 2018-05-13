@@ -1,0 +1,11 @@
+        1.ipconfig
+        2.Adaptador de LAN inalámbrica Wi-Fi
+        3. usar esta => Dirección IPv4
+
+Adaptador de LAN inalámbrica Wi-Fi:
+
+   Sufijo DNS específico para la conexión. . :
+   Vínculo: dirección IPv6 local. . . : fe80::ac32:1669:596c:cfb7%22
+   Dirección IPv4. . . . . . . . . . . . . . : 192.168.0.12  <====== ESTA*
+   Máscara de subred . . . . . . . . . . . . : 255.255.255.0
+   Puerta de enlace predeterminada . . . . . : 192.168.0.1

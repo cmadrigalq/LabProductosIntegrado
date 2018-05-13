@@ -1,7 +1,10 @@
 package labProductosBE.LogicaNegocio;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import java.io.Serializable;
-
+@JsonTypeInfo(include=As.WRAPPER_OBJECT, use=Id.CLASS)
 public class TipoProducto implements Serializable, Jsonable{
     int codigo;
     String descripcion;

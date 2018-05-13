@@ -1,14 +1,14 @@
 package labProductosBE.JSON;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import labProductosBE.LogicaNegocio.Producto;
+import labProductosBE.LogicaNegocio.TipoProducto;
 
 public class Json {
     JSONSerializer serializer;
@@ -18,36 +18,56 @@ public class Json {
         desSerializer = new JSONDeserializer();
     }
     public String toJson(Object s){
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(SerializationFeature.USE_EQUALITY_FOR_OBJECT_ID);
-            return objectMapper.writeValueAsString(s);
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
-            return "";
-        }
+        return serializer.serialize(s);
     }
     public Object toObject(String str,Class _class){
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(SerializationFeature.USE_EQUALITY_FOR_OBJECT_ID);
-            return objectMapper.readValue(str,_class);
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
-            return "";
-        } catch (IOException ex) {
-            Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
-            return "";
-        }
+        return desSerializer.deserialize(str, _class);
     }
     public String fromArray(List<? extends Object>list){
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(SerializationFeature.USE_EQUALITY_FOR_OBJECT_ID);
+            //objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             return objectMapper.writeValueAsString(list);
         }catch(Exception ex){
             System.err.println(ex.getCause());
             return "[]";
         }
     }    
+        public List<TipoProducto> toArrayTipos(String json){
+        ObjectMapper objectMapper = new ObjectMapper();
+       // objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        try {
+            List<LinkedHashMap> hash = objectMapper.readValue(json,List.class);
+            List<TipoProducto> res = new ArrayList();
+            for(LinkedHashMap h : hash){
+                res.add(toTipo(h));
+            }
+            return res;
+        } catch (IOException e) {
+            return new ArrayList<>();
+        }
+    }
+    TipoProducto toTipo(LinkedHashMap h){
+        TipoProducto nuevo = new TipoProducto();
+                nuevo.setCodigo( (Integer)h.get("codigo") );
+                nuevo.setDescripcion((String)h.get("descripcion"));
+                nuevo.setPorcentaje(((Double)h.get("porcentaje")).floatValue());
+       return nuevo;
+    }    
+    public List<Producto> toArrayProductos(String json){
+        ObjectMapper objectMapper = new ObjectMapper();
+        //objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        try {
+            List<LinkedHashMap<String,String>> hash = objectMapper.readValue(json,List.class);
+            List<Producto> res = new ArrayList();
+            for(LinkedHashMap h : hash){
+                Producto p = new Producto();
+                //TODO
+                res.add(p);
+            }
+            return res;
+        } catch (IOException e) {
+            return new ArrayList<>();
+        }
+    }
 }
