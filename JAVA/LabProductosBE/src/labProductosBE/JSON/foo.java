@@ -1,5 +1,7 @@
 package labProductosBE.JSON;
 
+import java.util.ArrayList;
+import java.util.List;
 import labProductosBE.LogicaNegocio.Producto;
 import labProductosBE.LogicaNegocio.TipoProducto;
 
@@ -20,6 +22,13 @@ public class foo {
         p.setTipo(new TipoProducto(666,"chanchito",0.0f));
         Json j = new Json();
         String str = j.toJson(p);
+        List<Producto> tp= new ArrayList<>();
+        tp.add(p);
         System.err.println(str);
+        str = j.fromArray(tp);
+        System.err.println(str);
+        tp = j.toArrayProductos(str);
+        System.err.println(j);
+        
     }
 }

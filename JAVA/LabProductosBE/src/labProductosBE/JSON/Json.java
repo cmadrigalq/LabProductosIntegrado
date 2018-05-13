@@ -33,7 +33,7 @@ public class Json {
             return "[]";
         }
     }    
-        public List<TipoProducto> toArrayTipos(String json){
+    public List<TipoProducto> toArrayTipos(String json){
         ObjectMapper objectMapper = new ObjectMapper();
        // objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
@@ -54,6 +54,17 @@ public class Json {
                 nuevo.setPorcentaje(((Double)h.get("porcentaje")).floatValue());
        return nuevo;
     }    
+    Producto toProducto(LinkedHashMap h){
+        Producto nuevo = new Producto();
+        nuevo.setCodigo((String)h.get("codigo"));
+        nuevo.setImportado((Boolean)h.get("importado"));
+        nuevo.setNombre((String)h.get("nombre"));
+        nuevo.setPrecio((Integer)h.get("precio"));
+        LinkedHashMap hash1 = (LinkedHashMap)h.get("tipo");
+        LinkedHashMap hash2 = (LinkedHashMap)hash1.get("labProductosBE.LogicaNegocio.TipoProducto");
+        nuevo.setTipo(toTipo(hash2));
+        return nuevo;
+    }
     public List<Producto> toArrayProductos(String json){
         ObjectMapper objectMapper = new ObjectMapper();
         //objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -61,8 +72,7 @@ public class Json {
             List<LinkedHashMap<String,String>> hash = objectMapper.readValue(json,List.class);
             List<Producto> res = new ArrayList();
             for(LinkedHashMap h : hash){
-                Producto p = new Producto();
-                //TODO
+                Producto p = toProducto(h);
                 res.add(p);
             }
             return res;
