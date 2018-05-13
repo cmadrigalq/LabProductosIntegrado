@@ -44,10 +44,10 @@ public class ProductosService extends HttpServlet {
                 case "productosByTipo":
                     arg = request.getParameter("arg0").replaceAll("\"", "");
                     argInt = Integer.valueOf(arg);
-                    ctl.productosByName(arg);
+                    ctl.productosByTipo(Integer.valueOf(arg));
                     json = jsn.toJson(Modelo.productos);
                     out.write(json);
-                    break;
+                    break;  
                 case "addproducto":
                     arg = request.getParameter("arg0").replaceAll("\"", "");
                     p = (Producto)jsn.toObject(arg, Producto.class);

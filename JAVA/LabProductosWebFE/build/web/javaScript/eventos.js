@@ -8,7 +8,7 @@ $(document).ready(
                         );
             });
             $("#buscarTipoBttn").click(e => {
-                Producto.buscarPorNombre(
+                Producto.buscarPorTipo(
                         $("#sel1 option:selected").attr("id")
                         );
             });

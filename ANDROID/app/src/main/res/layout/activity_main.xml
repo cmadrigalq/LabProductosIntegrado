@@ -122,9 +122,9 @@
         android:layout_height="23dp"
         android:layout_alignEnd="@+id/txtNameT"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="11dp"
-        android:text="192.168.0.12:8081"
+        android:layout_marginTop="24dp"
         android:hint="192.168.0.12:8081"
+        android:text="192.168.0.12:8081"
         app:layout_constraintTop_toBottomOf="@+id/btn"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="253dp" />
@@ -133,8 +133,8 @@
         android:id="@+id/lblName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ip"
-        android:layout_toEndOf="@+id/lblTipo2"
+        android:layout_alignStart="@+id/txtNameT"
+        android:layout_alignTop="@+id/ip"
         android:text="IP:PUERTO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

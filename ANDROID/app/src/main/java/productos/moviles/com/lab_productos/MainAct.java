@@ -71,8 +71,8 @@ public class MainAct extends AppCompatActivity {
         EditText codigo = findViewById(R.id.txtCode),
                 nombre = findViewById(R.id.txtName),
                 precio = findViewById(R.id.txtPrecio);
-        String   codigoStr = codigo.getText().toString(),
-                nombreStr = nombre.getText().toString(),
+        String   codigoStr = codigo.getText().toString()+"-c",
+                nombreStr = nombre.getText().toString()+"-n",
                 precioStr = precio.getText().toString();
         if(!validar(codigoStr,nombreStr,precioStr)){
             return;

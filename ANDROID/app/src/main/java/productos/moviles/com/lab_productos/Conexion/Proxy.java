@@ -1,19 +1,19 @@
 package productos.moviles.com.lab_productos.Conexion;
 
+import java.util.HashMap;
 import java.util.List;
 
-import labProductosBE.JSON.Json;
 import labProductosBE.LogicaNegocio.Producto;
 import labProductosBE.LogicaNegocio.TipoProducto;
 
 public class Proxy {
     List<TipoProducto> tipos;
     clConexion cl;
-    Json json;
+    JSON json;
     static Proxy proxy = new Proxy();
     private Proxy(){
         cl = new clConexion();
-        json = new Json();
+        json = new JSON();
     }
     public static Proxy instancia(){
         if(proxy == null)
@@ -24,11 +24,13 @@ public class Proxy {
         return this.tipos;
     }
     public List<TipoProducto> getTipos(String ip) {
-        String resultado = cl.getOutputFromUrl("?action=listarTipos",ip);
+        String resultado = cl.getOutputFromUrl("?action=listarTipos",ip,"GET",null);
         return (this.tipos = json.toArrayTipos(resultado));
     }
     public void agregar(Producto p,String ip){
-       String url = "?action=addproducto&arg0="+json.toJson(p);
-       cl.getOutputFromUrl(url,ip);
+       String url = "?action=addproducto";
+       HashMap<String,Object> args = new HashMap<>();
+       args.put("arg0",json.toJson(p));
+       cl.getOutputFromUrl(url,ip,"POST",args);
     }
 }
