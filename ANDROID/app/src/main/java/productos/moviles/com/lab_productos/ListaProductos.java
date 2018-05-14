@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -27,10 +28,10 @@ import labProductosBE.LogicaNegocio.TipoProducto;
 import productos.moviles.com.lab_productos.Conexion.Proxy;
 
 public class ListaProductos extends AppCompatActivity {
-    List<Producto> listaProductos;
-    List<TipoProducto> listaTipos;
+    String url = "192.168.0.17:8084";
     Proxy proxy =Proxy.instancia();
     Spinner s1;
+    List<Producto> listaProductos = null;
     int tipoSeleccionado = 0;
 
     @Override
@@ -38,12 +39,29 @@ public class ListaProductos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_productos);
         setTitle("Lista Productos");
-        proxy.getProductos("192.168.0.17:8084");
-        proxy.getTipos( "192.168.0.17:8084" );
+        listaProductos = proxy.getProductos(url);
+        proxy.getTipos(url);
         cargarSpinner(proxy.getTipos());
-        //dibujaTabla(proxy.getProductos());
-        Button alumnoNuevo = findViewById(R.id.btnNuevoProducto);
-        alumnoNuevo.setOnClickListener(new View.OnClickListener() {
+        dibujaTabla(listaProductos);
+        addListeners();
+    }
+
+    void addListeners(){
+        Button buscar = (Button) findViewById(R.id.btnBuscar);
+        buscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listaProductos = proxy.getProductos(url);
+                Spinner spinCarrerasOnClick = findViewById(R.id.spinTipoT);
+                if(!spinCarrerasOnClick.getSelectedItem().toString().equals(""))
+                    listaProductos = productosFiltroTipo(spinCarrerasOnClick.getSelectedItem().toString());
+                else
+                    listaProductos = proxy.getProductos(url);
+                dibujaTabla(listaProductos);
+            }
+        });
+        Button productoNuevo = findViewById(R.id.btnNuevoProducto);
+        productoNuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListaProductos.this,MainAct.class);
@@ -53,11 +71,12 @@ public class ListaProductos extends AppCompatActivity {
     }
 
     void cargarSpinner(List<TipoProducto>tipos){
-        String[] tpsArr = new String[tipos.size()];
+        String[] tpsArr = new String[tipos.size()+1];
+        tpsArr[0]="";
         for(int i = 0; i<tipos.size();i++){
-            tpsArr[i] = tipos.get(i).getDescripcion();
+            tpsArr[i+1] = tipos.get(i).getDescripcion();
         }
-        s1 = findViewById(R.id.spinTipo);
+        s1 = findViewById(R.id.spinTipoT);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, tpsArr);
         s1.setAdapter(adapter);
@@ -76,6 +95,15 @@ public class ListaProductos extends AppCompatActivity {
         });
     }
 
+    private List<Producto> productosFiltroTipo(String descripcion){
+        List<Producto> resultado = new ArrayList<>();
+        for(int i = 0; i < listaProductos.size(); i++){
+            if(listaProductos.get(i).getTipo().getDescripcion().equals(descripcion)){
+                resultado.add(listaProductos.get(i));            }
+        }
+        return resultado;
+    }
+
     private void dibujaTabla(List<Producto> p){
         TableLayout tabla = findViewById(R.id.idTableProductos);
         limpiaTabla(tabla);
@@ -90,14 +118,14 @@ public class ListaProductos extends AppCompatActivity {
                 tv1 = new TextView(getBaseContext());
                 tv2 = new TextView(getBaseContext());
                 btnEdit = new ImageButton(getBaseContext());
-                //btnEdit.setImageResource(R.drawable.ic_if_new_24_103173);
+                btnEdit.setImageResource(R.drawable.ic_if_new_24_103173);
                 tv1.setGravity(Gravity.CENTER);
                 tv2.setGravity(Gravity.CENTER);
                 tv1.setPadding(15,15,15,15);
                 tv2.setPadding(15,15,15,15);
-                tv1.setText(p.get(i).getNombre());
-                tv2.setText(p.get(i).getPrecioFinal());
-                final Producto producto = p.get(i);
+                tv1.setText(p.get(i).getCodigo());
+                tv2.setText(p.get(i).getNombre());
+                //final Producto producto = p.get(i);
                 btnEdit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -110,6 +138,7 @@ public class ListaProductos extends AppCompatActivity {
                         mensaje("Mostrar datos");
                     }
                 });
+
                 row.addView(tv1);
                 row.addView(tv2);
                 row.addView(btnEdit);

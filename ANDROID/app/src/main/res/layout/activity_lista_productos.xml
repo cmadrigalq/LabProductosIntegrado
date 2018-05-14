@@ -67,7 +67,7 @@
                     android:inputType="text" />
 
                 <Spinner
-                    android:id="@+id/spinTipo"
+                    android:id="@+id/spinTipoT"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:layout_weight="1" />
@@ -145,7 +145,7 @@
                                 android:background="@drawable/tableborder"
                                 android:gravity="center"
                                 android:padding="15dp"
-                                android:text="Nombre"
+                                android:text="Código"
                                 android:textAppearance="@style/TextAppearance.AppCompat" />
 
                             <TextView
@@ -154,7 +154,7 @@
                                 android:background="@drawable/tableborder"
                                 android:gravity="center"
                                 android:padding="15dp"
-                                android:text="Precio Final"
+                                android:text="Nombre"
                                 android:textAppearance="@style/TextAppearance.AppCompat" />
 
                             <TextView

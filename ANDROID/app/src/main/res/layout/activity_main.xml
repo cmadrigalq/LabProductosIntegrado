@@ -1,214 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainAct">
 
-    <EditText
-        android:id="@+id/txtCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="203dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="66dp"
-        tools:layout_editor_absoluteY="242dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/txtNameT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/txtTipo"
-        android:layout_marginTop="132dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="66dp"
-        tools:layout_editor_absoluteY="288dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lblTipo"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_alignBottom="@+id/spinTipo"
-        android:layout_toStartOf="@+id/txtCode"
-        android:text="Tipo"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="440dp" />
+                <TextView
+                    android:id="@+id/lblCodigo"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Código:"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    tools:text="Código:" />
 
-    <TextView
-        android:id="@+id/lblNameT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtName"
-        android:layout_toStartOf="@+id/txtCode"
-        android:text="Nombre"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="308dp" />
+                <EditText
+                    android:id="@+id/txCodigo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:ems="10"
+                    android:hint="Digite el código"
+                    android:inputType="text"
+                    android:textAlignment="center" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/lblPrecio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtPrecio"
-        android:layout_toStartOf="@+id/txtCode"
-        android:text="Precio"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="354dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lblCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="221dp"
-        android:layout_toStartOf="@+id/txtCode"
-        android:text="Codigo"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="259dp" />
+                <TextView
+                    android:id="@+id/lblNombre"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Nombre:"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    tools:text="Nombre:" />
 
-    <TextView
-        android:id="@+id/lblimportado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="48dp"
-        android:layout_toStartOf="@+id/txtCode"
-        android:text="Importado"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="401dp" />
+                <EditText
+                    android:id="@+id/txNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Digite el nombre"
+                    android:background="@drawable/back"
+                    android:textAlignment="center"
+                    android:inputType="text" />
+            </LinearLayout>
 
-    <SearchView
-        android:id="@+id/btnSearchN"
-        android:layout_width="39dp"
-        android:layout_height="33dp"
-        android:layout_alignTop="@+id/txtNameT"
-        android:layout_toEndOf="@+id/txtNameT"
-        tools:layout_editor_absoluteX="293dp"
-        tools:layout_editor_absoluteY="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    </SearchView>
+                <TextView
+                    android:id="@+id/lblPrecio"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Precio:"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    tools:text="Precio:" />
 
-    <EditText
-        android:id="@+id/txtTipo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="62dp"
-        android:layout_marginTop="79dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="66dp"
-        tools:layout_editor_absoluteY="43dp" />
+                <EditText
+                    android:id="@+id/txPrecio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Digite el precio"
+                    android:textAlignment="center"
+                    android:background="@drawable/back"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/lblTipo2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtNameT"
-        android:layout_toEndOf="@+id/lblNameT"
-        android:text="Tipo"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="57dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/ip"
-        android:layout_width="133dp"
-        android:layout_height="23dp"
-        android:layout_alignEnd="@+id/txtNameT"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="24dp"
-        android:hint="192.168.0.17:8084"
-        android:text="192.168.0.17:8084"
-        app:layout_constraintTop_toBottomOf="@+id/btn"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="253dp" />
+                <TextView
+                    android:id="@+id/lblImportado"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Importado:"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    tools:text="Importado:" />
 
-    <TextView
-        android:id="@+id/lblName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtNameT"
-        android:layout_alignTop="@+id/ip"
-        android:text="IP:PUERTO"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <CheckBox
+                    android:id="@+id/chkImportado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/lblimportado"
+                    android:layout_weight="1"
+                    tools:layout_editor_absoluteX="88dp"
+                    tools:layout_editor_absoluteY="388dp" />
 
-    <TextView
-        android:id="@+id/lblName2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtTipo"
-        android:layout_toStartOf="@+id/txtNameT"
-        android:text="Nombre"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
 
-    <SearchView
-        android:id="@+id/btnSearchT"
-        android:layout_width="39dp"
-        android:layout_height="33dp"
-        android:layout_alignTop="@+id/txtTipo"
-        android:layout_toEndOf="@+id/txtNameT"
-        tools:layout_editor_absoluteX="293dp"
-        tools:layout_editor_absoluteY="43dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    </SearchView>
+                <TextView
+                    android:id="@+id/lblTipos"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Tipo:"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/txtName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtCode"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-203dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="66dp"
-        tools:layout_editor_absoluteY="4dp" />
+                <Spinner
+                    android:id="@+id/spinTipoP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/chkImportado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtCode"
-        android:layout_alignTop="@+id/lblimportado"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="388dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="93dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    <Spinner
-        android:id="@+id/spinTipo"
-        android:layout_width="227dp"
-        android:layout_height="32dp"
-        android:layout_alignStart="@+id/txtCode"
-        android:layout_below="@+id/txtPrecio"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="440dp" />
+                <Button
+                    android:id="@+id/btnAceptarA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/ic_if_check_box_outline_326561"
+                    android:text="Aceptar"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textStyle="bold"
+                    tools:text="Aceptar" />
 
-    <EditText
-        android:id="@+id/txtPrecio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtCode"
-        android:layout_below="@+id/txtName"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.39"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="334dp" />
-
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txtNameT"
-        android:layout_alignTop="@+id/lblimportado"
-        android:text="Agregar" />
-
-</android.widget.RelativeLayout>
+                <Button
+                    android:id="@+id/btnCancelarA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/ic_if_x_square_2561206"
+                    android:text="Cancelar"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textStyle="bold"
+                    tools:text="Cancelar" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

@@ -19,7 +19,7 @@ import labProductosBE.LogicaNegocio.TipoProducto;
 import productos.moviles.com.lab_productos.Conexion.Proxy;
 
 public class MainAct extends AppCompatActivity {
-
+    String url = "192.168.0.17:8084";
     Button btn;
     TextView txt;
     Proxy proxy =Proxy.instancia();
@@ -29,28 +29,32 @@ public class MainAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = findViewById(R.id.btnAdd);
+        Button button = findViewById(R.id.btnAceptarA);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 agregar();
             }
         });
-        List<Producto> productos = proxy.getProductos(getIp());
-        proxy.getTipos( getIp() );
+        proxy.getProductos();
+        proxy.getTipos( url );
         cargarSpinner(proxy.getTipos());
+        Button cancelar = findViewById(R.id.btnCancelarA);
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
     }
 
-    String getIp(){
-        android.widget.EditText t = findViewById(R.id.ip);
-        return t.getText().toString();
-    }
     void cargarSpinner(List<TipoProducto>tipos){
         String[] tpsArr = new String[tipos.size()];
         for(int i = 0; i<tipos.size();i++){
             tpsArr[i] = tipos.get(i).getDescripcion();
         }
-        s1 = findViewById(R.id.spinTipo);
+        s1 = findViewById(R.id.spinTipoP);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, tpsArr);
         s1.setAdapter(adapter);
@@ -69,12 +73,12 @@ public class MainAct extends AppCompatActivity {
         });
     }
     void agregar(){
-        EditText codigo = findViewById(R.id.txtCode),
-                nombre = findViewById(R.id.txtName),
-                precio = findViewById(R.id.txtPrecio);
-        String   codigoStr = codigo.getText().toString()+"-c",
-                nombreStr = nombre.getText().toString()+"-n",
-                precioStr = precio.getText().toString();
+        EditText codigo = findViewById(R.id.txCodigo),
+                nombre = findViewById(R.id.txNombre),
+                precio = findViewById(R.id.txPrecio);
+        String codigoStr = codigo.getText().toString();
+        String nombreStr = nombre.getText().toString();
+        String precioStr = precio.getText().toString();
         if(!validar(codigoStr,nombreStr,precioStr)){
             return;
         }
@@ -85,7 +89,7 @@ public class MainAct extends AppCompatActivity {
                 precioD,
                 importa.isChecked(),
                 proxy.getTipos().get(this.tipoSeleccionado));
-        proxy.agregar(producto,getIp());
+        proxy.agregar(producto,url);
         mensaje("Producto enviado, por favor, verifique.");
     }
 
