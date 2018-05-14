@@ -2,6 +2,9 @@ package labProductosBE.JSON;
 
 import java.util.ArrayList;
 import java.util.List;
+import labProductosBE.AccesoDatos.GlobalException;
+import labProductosBE.AccesoDatos.NoDataException;
+import labProductosBE.AccesoDatos.ServicioProducto;
 import labProductosBE.LogicaNegocio.Producto;
 import labProductosBE.LogicaNegocio.TipoProducto;
 
@@ -13,7 +16,7 @@ import labProductosBE.LogicaNegocio.TipoProducto;
  * @date 13/05/2018
  */
 public class foo {
-    public static void main(String[]args){
+    public static void main(String[]args) throws GlobalException, NoDataException{
         Producto p = new Producto();
         p.setCodigo("la fruta");
         p.setImportado(false);
@@ -29,6 +32,6 @@ public class foo {
         System.err.println(str);
         tp = j.toArrayProductos(str);
         System.err.println(j);
-        
+     
     }
 }

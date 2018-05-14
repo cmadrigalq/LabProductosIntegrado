@@ -17,8 +17,8 @@ import oracle.jdbc.internal.OracleTypes;
 public class ServicioProducto extends Servicio {
 
     private static final String insertarProducto = "{call insertar_producto(?,?,?,?,?)}";
-    private static final String listarProductos  = "{?=call listar_producto()}";
-    private static final String LISTAR_BY_TIPO   = "{?=call listar_productoByTipo(?)}";
+    private static final String listarProductos = "{?=call listar_producto()}";
+    private static final String LISTAR_BY_TIPO = "{?=call listar_productoByTipo(?)}";
     private static final String LISTAR_BY_NOMBRE = "{?=call listar_productoByNombre(?)}";
     private static final String LISTAR_BY_CODIGO = "{?=call listar_productoByCod(?)}";
 
@@ -86,62 +86,6 @@ public class ServicioProducto extends Servicio {
         return coleccion;
     }
 
-    public List<Producto> listarProducto() throws GlobalException, NoDataException {
-        conectar();
-        ResultSet rs = null;
-        List<Producto> coleccion = new ArrayList();
-        TipoProducto tipoProducto = null;
-        Producto producto = null;
-        CallableStatement pstmt = null;
-        boolean imp = false;
-
-        try {
-            pstmt = conexion.prepareCall(listarProductos);
-            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
-            pstmt.execute();
-            rs = (ResultSet) pstmt.getObject(1);
-            while (rs.next()) {
-                tipoProducto = new TipoProducto(rs.getInt("id_tipo"),
-                        rs.getString("descripcion"),
-                        rs.getFloat("porcentaje"));
-                if (rs.getString("importado").equals("S")) {
-                    imp = true;
-                }
-
-                producto = new Producto(rs.getString("codigo"),
-                        rs.getString("nombre"),
-                        rs.getInt("precio"),
-                        imp,
-                        tipoProducto);
-
-                coleccion.add(producto);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-            throw new GlobalException("Sentencia no válida");
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-
-                desconectar();
-            } catch (SQLException e) {
-                throw new GlobalException("Estatutos invalidos o nulos");
-            }
-        }
-        if (coleccion == null || coleccion.size() == 0) {
-            throw new NoDataException("No hay datos");
-        }
-
-        return coleccion;
-    }
-
     public void insertarProducto(Producto producto) throws GlobalException, NoDataException {
         conectar();
         CallableStatement pstmt = null;
@@ -173,6 +117,54 @@ public class ServicioProducto extends Servicio {
                 throw new GlobalException("Estatutos invalidos o nulos");
             }
         }
+    }
+
+    public List<Producto> listarProducto() throws GlobalException, NoDataException {
+        conectar();
+        ResultSet rs = null;
+        List<Producto> coleccion = new ArrayList();
+        Producto producto = null;
+        CallableStatement pstmt = null;
+        boolean imp = false;
+        try {
+            pstmt = conexion.prepareCall(listarProductos);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                imp = rs.getString("importado").equals("S");
+                producto = new Producto(rs.getString("codigo"),
+                        rs.getString("nombre"),
+                        rs.getInt("precio"),
+                        imp,
+                        new TipoProducto(
+                                rs.getInt("id_tipo"),
+                                rs.getString("descripcion"),
+                                rs.getFloat("porcentaje")
+                        )
+                );
+                coleccion.add(producto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Sentencia no válida");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+        if (coleccion == null || coleccion.size() == 0) {
+            throw new NoDataException("No hay datos");
+        }
+        return coleccion;
     }
 
     /**

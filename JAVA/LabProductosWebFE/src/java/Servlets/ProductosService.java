@@ -58,6 +58,10 @@ public class ProductosService extends HttpServlet {
                     ctl.listarTiposProductos();
                     out.write(jsn.fromArray(Modelo.tipos));
                     break;
+                case "listarProductos":
+                    ctl.listarProductos();
+                    out.write(jsn.fromArray(Modelo.productos));
+                    break;
                 default:
                     out.write("eco");
                     break;

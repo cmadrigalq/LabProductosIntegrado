@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import labProductosBE.LogicaNegocio.Producto;
@@ -36,7 +37,8 @@ public class MainAct extends AppCompatActivity {
                 agregar();
             }
         });
-        proxy.getTipos( getIp() );
+        List<Producto> listaProductos = proxy.getProductos(getIp());
+        List<TipoProducto> listaTipos = proxy.getTipos( getIp() );
         cargarSpinner(proxy.getTipos());
     }
 
