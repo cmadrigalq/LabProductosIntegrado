@@ -48,6 +48,19 @@ public class ProductosService extends HttpServlet {
                     json = jsn.toJson(Modelo.productos);
                     out.write(json);
                     break;  
+                case "productosByNombrePARAMOVIL":
+                    arg = request.getParameter("arg0").replaceAll("\"","");
+                    ctl.productosByName(arg);
+                    json = jsn.fromArray(Modelo.productos);
+                    out.write(json);
+                    break;
+                case "productosByTipoPARAMOVIL":
+                    arg = request.getParameter("arg0").replaceAll("\"", "");
+                    argInt = Integer.valueOf(arg);
+                    ctl.productosByTipo(Integer.valueOf(arg));
+                    json = jsn.fromArray(Modelo.productos);
+                    out.write(json);
+                    break;      
                 case "addproducto":
                     arg = request.getParameter("arg0").replaceAll("\"", "");
                     p = (Producto)jsn.toObject(arg, Producto.class);
