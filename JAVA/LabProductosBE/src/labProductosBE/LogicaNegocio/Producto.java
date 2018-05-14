@@ -1,11 +1,13 @@
 package labProductosBE.LogicaNegocio;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.io.Serializable;
 
 /**
  *
  * @author Manuel Céspedes
  */
+@JsonTypeInfo(include=JsonTypeInfo.As.WRAPPER_OBJECT, use=JsonTypeInfo.Id.CLASS)
 public class Producto implements Serializable, Jsonable{
 
     String codigo;

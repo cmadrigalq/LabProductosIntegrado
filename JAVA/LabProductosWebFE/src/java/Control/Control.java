@@ -70,7 +70,7 @@ public class Control {
 
     public void listarProductos() throws GlobalException, NoDataException {
         try {
-            svp.listarProducto();
+            Modelo.productos = svp.listarProducto();
         } catch (GlobalException | NoDataException ex) {
             throw ex;
         }

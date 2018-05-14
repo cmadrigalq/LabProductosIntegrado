@@ -33,7 +33,7 @@ public class clConexion {
     public void setURL(String URL,String ip) {
         if(ip == null || ip.trim().isEmpty())
             ip = defaultIP;
-        this.URL = String.format(urlFormat,defaultIP) + URL;
+        this.URL = String.format(urlFormat,ip) + URL;
         /*
         ipconfig
         Adaptador de LAN inalámbrica Wi-Fi
