@@ -36,7 +36,7 @@ public class MainAct extends AppCompatActivity {
                 agregar();
             }
         });
-        proxy.getProductos(getIp());
+        List<Producto> productos = proxy.getProductos(getIp());
         proxy.getTipos( getIp() );
         cargarSpinner(proxy.getTipos());
     }
