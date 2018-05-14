@@ -20,7 +20,7 @@ import java.util.Set;
 
 public class clConexion {
     final String urlFormat = "http://%s/webProductosFE/ProductosService";
-    final String defaultIP = "192.168.0.12:8081";
+    final String defaultIP = "192.168.8.109:8080";
     public clConexion() {
     }
 
